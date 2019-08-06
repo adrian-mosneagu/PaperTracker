@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Paper Tracker</string>
+    <string name="image">Image</string>
+    <string name="name">Name</string>
+    <string name="details">Details</string>
+    <string name="edit">EDIT</string>
+    <string name="delete">DELETE</string>
+    <string name="expand">Expand</string>
+</resources>
