@@ -6,7 +6,7 @@ public class Item {
     private String name;
     private String details;
 
-    private ArrayList<Item> items;
+    private ArrayList<Document> documents;
 
     // private Image image;
 
@@ -18,8 +18,8 @@ public class Item {
         return details;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Document> getDocuments() {
+        return documents;
     }
 
     public void setName(String name) {
@@ -27,6 +27,11 @@ public class Item {
     }
 
     public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public Item(String name, String details) {
+        this.name = name;
         this.details = details;
     }
 

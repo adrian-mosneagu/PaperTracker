@@ -6,4 +6,5 @@
     <string name="edit">EDIT</string>
     <string name="delete">DELETE</string>
     <string name="expand">Expand</string>
+    <string name="delete_doc">Delete Document</string>
 </resources>

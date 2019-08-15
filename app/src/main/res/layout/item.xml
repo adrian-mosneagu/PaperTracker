@@ -43,7 +43,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView">
 
                 <TextView
-                    android:id="@+id/vehicle_name"
+                    android:id="@+id/tvItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -52,12 +52,12 @@
                     android:text="@string/name"
                     android:textColor="@android:color/primary_text_light"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView4"
+                    app:layout_constraintBottom_toTopOf="@+id/tvItemDetails"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/tvItemDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -66,7 +66,7 @@
                     android:text="@string/details"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicle_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvItemName" />
 
                 <ImageButton
                     android:id="@+id/btnExpandCard"
@@ -80,7 +80,7 @@
                     android:theme="@android:style/Widget.Holo.Light.ExpandableListView"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/vehicle_name"
+                    app:layout_constraintTop_toTopOf="@+id/tvItemName"
                     app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

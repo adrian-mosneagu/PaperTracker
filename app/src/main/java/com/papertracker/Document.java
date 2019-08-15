@@ -10,7 +10,7 @@ public class Document {
         return name;
     }
 
-    public Date getExpirationDate() {
+    protected Date getExpirationDate() {
         return expirationDate;
     }
 
@@ -21,4 +21,10 @@ public class Document {
     public void setName(String name) {
         this.name = name;
     }
+
+    protected Document(String name, Date expirationDate) {
+        this.name = name;
+        this.expirationDate = expirationDate;
+    }
+
 }
