@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvItems"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintBottom_toBottomOf="@+id/rvItems"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_add_black_24dp" />

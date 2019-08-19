@@ -18,7 +18,8 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tip document"/>
 
     <TextView
         android:id="@+id/tvDocExpirationDate"
@@ -32,16 +33,18 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDocName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="xx/yy/20ZZ"/>
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btDocDelete"
         android:layout_width="30dp"
         android:layout_height="28dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/delete_doc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

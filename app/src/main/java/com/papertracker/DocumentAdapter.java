@@ -4,37 +4,48 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 
-public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.ViewHolder> {
+public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHolder> {
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
         private TextView expirationDate;
+        private ImageButton deleteButton;
 
-        protected ViewHolder(View itemView) {
+        protected ViewHolder(final View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.tvDocName);
             expirationDate = itemView.findViewById(R.id.tvDocExpirationDate);
+            deleteButton = itemView.findViewById(R.id.btDocDelete);
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    documents.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
         }
-
     }
+
     private List<Document> documents;
 
-    protected DocumentsAdapter(List<Document> documents) {
-        this.documents = documents;
+    protected DocumentAdapter(List<Document> documents) {
+        this.documents = new ArrayList<>(documents);
     }
 
     @Override
-    public DocumentsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DocumentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -43,7 +54,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.View
         return new ViewHolder(docView);
     }
 
-    public void onBindViewHolder(DocumentsAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(DocumentAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Document doc = documents.get(position);
 
