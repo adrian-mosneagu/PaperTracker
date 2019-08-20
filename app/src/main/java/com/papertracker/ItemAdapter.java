@@ -1,6 +1,8 @@
 package com.papertracker;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +48,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     } else {
                         expanded = expandView();
                     }
+                }
+            });
+
+            btnItemDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new AlertDialog.Builder(itemView.getContext()).setTitle("Confirm deletion")
+                            .setMessage("Delete item " + tvItemName.getText() + "?")
+                            .setIcon(android.R.drawable.stat_sys_warning)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    items.remove(getAdapterPosition());
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Toast.makeText(itemView.getContext(), "Item not deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }).show();
                 }
             });
         }

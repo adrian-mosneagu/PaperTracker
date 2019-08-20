@@ -1,11 +1,14 @@
 package com.papertracker;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,8 +34,20 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    documents.remove(getAdapterPosition());
-                    notifyDataSetChanged();
+                    new AlertDialog.Builder(itemView.getContext()).setTitle("Confirm deletion")
+                            .setMessage("Delete document " + name.getText() + "?")
+                            .setIcon(android.R.drawable.stat_sys_warning)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    documents.remove(getAdapterPosition());
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Toast.makeText(itemView.getContext(), "Document not deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }).show();
                 }
             });
         }
