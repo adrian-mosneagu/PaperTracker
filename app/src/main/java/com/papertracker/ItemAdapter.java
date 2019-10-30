@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +26,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     protected class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemName;
         private TextView tvItemDetails;
-        private ImageButton btnExpandCard;
         private Button btnItemDelete;
         private Button btnItemEdit;
 
@@ -36,11 +35,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
             tvItemName = itemView.findViewById(R.id.tvItemName);
             tvItemDetails = itemView.findViewById(R.id.tvItemDetails);
-            btnExpandCard = itemView.findViewById(R.id.btnExpandCard);
             btnItemDelete = itemView.findViewById(R.id.btnItemDelete);
             btnItemEdit = itemView.findViewById(R.id.btnItemEdit);
 
-            btnExpandCard.setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.cardView).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (expanded) {
@@ -73,7 +71,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         private boolean expandView() {
-            ImageView ivExpandCard = itemView.findViewById(R.id.btnExpandCard);
+            ImageView ivExpandCard = itemView.findViewById(R.id.expandImage);
             ivExpandCard.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
             itemView.findViewById(R.id.expandedLayout).setVisibility(View.VISIBLE);
 
@@ -93,7 +91,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         private boolean hideView() {
-            ImageView ivExpandCard = itemView.findViewById(R.id.btnExpandCard);
+            ImageView ivExpandCard = itemView.findViewById(R.id.expandImage);
             ivExpandCard.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
             itemView.findViewById(R.id.expandedLayout).setVisibility(View.GONE);
 
@@ -108,7 +106,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     @Override
-    public ItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @NonNull
+    public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -117,7 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return new ItemAdapter.ViewHolder(itemView);
     }
 
-    public void onBindViewHolder(ItemAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ItemAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Item item = items.get(position);
 
