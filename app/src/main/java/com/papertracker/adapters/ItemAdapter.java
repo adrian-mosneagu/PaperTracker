@@ -1,4 +1,4 @@
-package com.papertracker;
+package com.papertracker.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.papertracker.R;
+import com.papertracker.models.Document;
+import com.papertracker.models.Item;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +34,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         private Button btnItemEdit;
 
 
-        protected ViewHolder(final View itemView) {
+        private ViewHolder(final View itemView) {
             super(itemView);
 
             tvItemName = itemView.findViewById(R.id.tvItemName);
@@ -101,7 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     private List<Item> items;
 
-    protected ItemAdapter(List<Item> items) {
+    public ItemAdapter(List<Item> items) {
         this.items = new ArrayList<>(items);
     }
 

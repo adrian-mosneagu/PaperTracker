@@ -1,4 +1,4 @@
-package com.papertracker;
+package com.papertracker.models;
 
 import java.util.ArrayList;
 

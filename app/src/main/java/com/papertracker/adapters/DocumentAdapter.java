@@ -1,4 +1,4 @@
-package com.papertracker;
+package com.papertracker.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.papertracker.R;
+import com.papertracker.models.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

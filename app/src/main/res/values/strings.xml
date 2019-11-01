@@ -7,4 +7,6 @@
     <string name="delete">DELETE</string>
     <string name="expand">Expand</string>
     <string name="delete_doc">Delete Document</string>
+    <string name="expiration_date">Expiration Date</string>
+    <string name="new_document">Document</string>
 </resources>

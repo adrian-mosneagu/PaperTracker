@@ -1,4 +1,4 @@
-package com.papertracker;
+package com.papertracker.models;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ public class Document {
         return name;
     }
 
-    protected Date getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
@@ -22,7 +22,7 @@ public class Document {
         this.name = name;
     }
 
-    protected Document(String name, Date expirationDate) {
+    public Document(String name, Date expirationDate) {
         this.name = name;
         this.expirationDate = expirationDate;
     }
