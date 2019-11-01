@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/name"
         android:textColor="@android:color/primary_text_light"
@@ -24,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/details"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +34,6 @@
         android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/delete_doc"
@@ -46,12 +43,12 @@
         app:srcCompat="@drawable/ic_delete_black_24dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivWarning"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:contentDescription="@string/warning"
         app:layout_constraintEnd_toStartOf="@+id/btDocDelete"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_warning_yellow_24dp"

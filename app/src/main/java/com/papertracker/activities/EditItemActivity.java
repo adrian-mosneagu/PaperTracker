@@ -16,16 +16,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EditItemActivity extends AppCompatActivity {
+    ArrayList<Document> docList;
+    RecyclerView rvDocs;
+    ItemEditorAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_activity);
 
 
-        ArrayList<Document> docList = new ArrayList<>();
+        docList = new ArrayList<>();
         docList.add(new Document("test", new Date()));
-        ItemEditorAdapter adapter = new ItemEditorAdapter(docList);
-        RecyclerView rvDocs = findViewById(R.id.rvNewDocs);
+        adapter = new ItemEditorAdapter(docList);
+        rvDocs = findViewById(R.id.rvNewDocs);
         rvDocs.setAdapter(adapter);
         rvDocs.setLayoutManager(new LinearLayoutManager(EditItemActivity.this));
 
@@ -35,7 +38,9 @@ public class EditItemActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Document doc = new Document("", new Date());
+                adapter.getDocuments().add(doc);
+                adapter.notifyDataSetChanged();
             }
         });
     }

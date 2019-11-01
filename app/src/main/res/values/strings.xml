@@ -9,4 +9,5 @@
     <string name="delete_doc">Delete Document</string>
     <string name="expiration_date">Expiration Date</string>
     <string name="new_document">Document</string>
+    <string name="warning">Warning</string>
 </resources>

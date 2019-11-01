@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,10 +49,21 @@ public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.Vi
                     picker.show();
                 }
             });
+
+
+            ImageButton deleteButton = itemView.findViewById(R.id.btnNewDocDelete);
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    documents.remove(getAdapterPosition());
+                    notifyDataSetChanged();}
+            });
         }
     }
 
     private List<Document> documents;
+
 
     public ItemEditorAdapter(List<Document> documents) {
         this.documents = new ArrayList<>(documents);
@@ -76,5 +88,9 @@ public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.Vi
     @Override
     public int getItemCount() {
         return documents.size();
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
     }
 }
