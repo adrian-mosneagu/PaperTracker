@@ -3,6 +3,7 @@ package com.papertracker.adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.papertracker.R;
+import com.papertracker.activities.EditItemActivity;
 import com.papertracker.models.Document;
 import com.papertracker.models.Item;
 
@@ -70,6 +72,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                                     Toast.makeText(itemView.getContext(), "Item not deleted", Toast.LENGTH_SHORT).show();
                                 }
                             }).show();
+                }
+            });
+
+            btnItemEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(itemView.getContext(), EditItemActivity.class);
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }
