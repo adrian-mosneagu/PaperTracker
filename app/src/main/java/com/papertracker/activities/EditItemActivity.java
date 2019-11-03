@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -38,7 +39,7 @@ public class EditItemActivity extends AppCompatActivity {
                         .setIcon(android.R.drawable.stat_sys_warning)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                // TODO: Add toast on main activity for cancel
+                                Toast.makeText(EditItemActivity.this, "Item not saved!", Toast.LENGTH_LONG).show();
                                 finish();
                             }
                         })
@@ -54,7 +55,8 @@ public class EditItemActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Add item to DB, add toast on main activity for cancel
+                // TODO: Add item to DB
+                Toast.makeText(EditItemActivity.this, "Item saved", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
