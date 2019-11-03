@@ -12,11 +12,10 @@
         <activity android:name="com.papertracker.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EditItemActivity" />
+        <activity android:name=".activities.EditItemActivity" android:theme="@style/AppTheme.PaperTrackerActionBar"/>
     </application>
 
 </manifest>

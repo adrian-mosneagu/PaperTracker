@@ -10,4 +10,6 @@
     <string name="expiration_date">Expiration Date</string>
     <string name="new_document">Document</string>
     <string name="warning">Warning</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
 </resources>
