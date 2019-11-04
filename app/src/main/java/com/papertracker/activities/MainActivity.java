@@ -12,10 +12,8 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.papertracker.R;
 import com.papertracker.adapters.ItemAdapter;
-import com.papertracker.models.Item;
+import com.papertracker.helpers.PaperTrackerDBHelper;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,15 +42,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateItems() {
-        List<Item> itemList = new ArrayList<>();
-
         RecyclerView rvItems = findViewById(R.id.rvItems);
-
-        // TODO: This info should be retrieved from DB
-        itemList.add(new Item("TM23MOS", "BMW"));
-        itemList.add(new Item("TM18MOS", "Honda"));
-
-        ItemAdapter adapter = new ItemAdapter(itemList);
+        ItemAdapter adapter = new ItemAdapter(new PaperTrackerDBHelper(this).getItems());
         rvItems.setAdapter(adapter);
         rvItems.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }

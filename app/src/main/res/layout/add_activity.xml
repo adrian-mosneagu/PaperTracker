@@ -63,6 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name" />
@@ -84,6 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/newItemNameInput">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etItemDetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/details" />

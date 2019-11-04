@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.papertracker.R;
 import com.papertracker.adapters.ItemEditorAdapter;
+import com.papertracker.helpers.PaperTrackerDBHelper;
 import com.papertracker.models.Document;
 
 import java.util.ArrayList;
@@ -55,7 +57,14 @@ public class EditItemActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Add item to DB
+                PaperTrackerDBHelper dbHelper = new PaperTrackerDBHelper(EditItemActivity.this);
+                TextInputEditText name = findViewById(R.id.etItemName);
+                TextInputEditText details = findViewById(R.id.etItemDetails);
+                if (name.getText() == null || details.getText() == null) {
+                    Toast.makeText(EditItemActivity.this, "Name and details are mandatory!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                dbHelper.addItem(name.getText().toString(), details.getText().toString());
                 Toast.makeText(EditItemActivity.this, "Item saved", Toast.LENGTH_LONG).show();
                 finish();
             }
