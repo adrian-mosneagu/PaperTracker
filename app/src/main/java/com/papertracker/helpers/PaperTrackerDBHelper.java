@@ -32,13 +32,13 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createItemsTable = "CREATE TABLE " +
                 ITEMS_TABLE_NAME + " (" +
-                ID_COLUMN + " blob PRIMARY KEY AUTOINCREMENT, " +
+                ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NAME_COLUMN + " text, " +
                 DESCRIPTION_COLUMN + " text)";
 
         String createDocumentsTable = "CREATE TABLE " +
                 DOCUMENTS_TABLE_NAME + " (" +
-                ID_COLUMN + " blob PRIMARY KEY AUTOINCREMENT, " +
+                ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NAME_COLUMN + " text, " +
                 EXPIRATION_DATE_COLUMN + " datetime)";
 
