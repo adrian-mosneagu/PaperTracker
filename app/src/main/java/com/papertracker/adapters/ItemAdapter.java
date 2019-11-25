@@ -64,6 +64,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                             .setIcon(android.R.drawable.stat_sys_warning)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
+                                    Item item = items.get(getAdapterPosition());
+                                    PaperTrackerDBHelper dbHelper = new PaperTrackerDBHelper(itemView.getContext());
+                                    dbHelper.deleteItem(item.getItemID());
+                                    dbHelper.deleteDocuments(item.getItemID());
                                     items.remove(getAdapterPosition());
                                     notifyDataSetChanged();
                                 }

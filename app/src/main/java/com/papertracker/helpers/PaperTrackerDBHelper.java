@@ -76,6 +76,17 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
     }
 
     public Item getItem(int itemID) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(ITEMS_TABLE_NAME, null, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)}, null, null, null);
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
+            String details = cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN));
+            int id = cursor.getInt(cursor.getColumnIndex(ID_COLUMN));
+            cursor.close();
+            return new Item(name, details, id);
+        }
+
+        cursor.close();
         return null;
     }
 
@@ -90,6 +101,7 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
                 expirationDate = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy").parse(cursor.getString(cursor.getColumnIndex(EXPIRATION_DATE_COLUMN)));
             } catch (ParseException e) {
                 Log.e("ERROR", "Invalid expiration date entry in the DB for " + name);
+                cursor.close();
                 return documents;
             }
             documents.add(new Document(name, expirationDate));
@@ -110,7 +122,10 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         return itemID;
     }
 
-    public void deleteItem(int itemID) {}
+    public void deleteItem(int itemID) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(ITEMS_TABLE_NAME, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)});
+    }
 
     public void addDocument(int itemID, String name, Date expirationDate) {
         SQLiteDatabase db = getWritableDatabase();
@@ -135,6 +150,9 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteDocument(int documentID) {}
+    public void deleteDocuments(int itemID) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(DOCUMENTS_TABLE_NAME, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)});
+    }
 
 }
