@@ -21,6 +21,7 @@ import com.papertracker.R;
 import com.papertracker.adapters.ItemEditorAdapter;
 import com.papertracker.helpers.PaperTrackerDBHelper;
 import com.papertracker.models.Document;
+import com.papertracker.models.Item;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,8 +82,22 @@ public class EditItemActivity extends AppCompatActivity {
             }
         });
 
+        int itemID = getIntent().getIntExtra("ItemID", -1);
+
         docList = new ArrayList<>();
-        docList.add(new Document("", null));
+        if (itemID == -1) {
+            docList.add(new Document("", null));
+        } else {
+            PaperTrackerDBHelper dbHelper = new PaperTrackerDBHelper(this);
+            TextInputEditText itemName = findViewById(R.id.etItemName);
+            TextInputEditText itemDetails = findViewById(R.id.etItemDetails);
+            Item item = dbHelper.getItem(itemID);
+            if (item != null) {
+                itemName.setText(item.getName());
+                itemDetails.setText(item.getDetails());
+            }
+            docList = dbHelper.getDocuments(itemID);
+        }
         adapter = new ItemEditorAdapter(docList);
         rvDocs = findViewById(R.id.rvNewDocs);
         rvDocs.setAdapter(adapter);

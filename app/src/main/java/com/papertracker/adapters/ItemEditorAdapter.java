@@ -16,7 +16,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.papertracker.R;
 import com.papertracker.models.Document;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.ViewHolder> {
@@ -80,6 +82,12 @@ public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.Vi
     public void onBindViewHolder(ItemEditorAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Document doc = documents.get(position);
+
+        // Set item views based on your views and data model
+        TextInputEditText name = viewHolder.name;
+        name.setText(doc.getName());
+        EditText details = viewHolder.expirationDate;
+        details.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(doc.getExpirationDate()));
     }
 
     // Returns the total count of items in the list

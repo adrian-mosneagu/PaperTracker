@@ -23,7 +23,6 @@ import com.papertracker.models.Document;
 import com.papertracker.models.Item;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
@@ -84,6 +83,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(itemView.getContext(), EditItemActivity.class);
+                    Item item = items.get(getAdapterPosition());
+                    intent.putExtra("ItemID", item.getItemID());
                     itemView.getContext().startActivity(intent);
                 }
             });
