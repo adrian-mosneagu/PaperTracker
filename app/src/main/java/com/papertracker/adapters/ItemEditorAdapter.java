@@ -17,18 +17,16 @@ import com.papertracker.R;
 import com.papertracker.models.Document;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.ViewHolder> {
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextInputEditText name;
         private EditText expirationDate;
 
         protected ViewHolder(final View itemView) {
             super(itemView);
-
             name = itemView.findViewById(R.id.newDocName);
             expirationDate = itemView.findViewById(R.id.expirationDate);
 
@@ -62,10 +60,10 @@ public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.Vi
         }
     }
 
-    private List<Document> documents;
+    private ArrayList<Document> documents;
 
 
-    public ItemEditorAdapter(List<Document> documents) {
+    public ItemEditorAdapter(ArrayList<Document> documents) {
         this.documents = new ArrayList<>(documents);
     }
 
@@ -90,7 +88,8 @@ public class ItemEditorAdapter extends RecyclerView.Adapter<ItemEditorAdapter.Vi
         return documents.size();
     }
 
-    public List<Document> getDocuments() {
+    public ArrayList<Document> getDocuments() {
         return documents;
     }
+
 }

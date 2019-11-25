@@ -5,6 +5,12 @@ import java.util.Date;
 public class Document {
     private String name;
     private Date expirationDate;
+    private int itemID;
+
+    public Document(String name, Date expirationDate) {
+        this.name = name;
+        this.expirationDate = expirationDate;
+    }
 
     public String getName() {
         return name;
@@ -22,9 +28,11 @@ public class Document {
         this.name = name;
     }
 
-    public Document(String name, Date expirationDate) {
-        this.name = name;
-        this.expirationDate = expirationDate;
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
+    public int getItemID() {
+        return itemID;
+    }
 }

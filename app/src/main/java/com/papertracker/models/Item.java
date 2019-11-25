@@ -8,7 +8,20 @@ public class Item {
 
     private ArrayList<Document> documents;
 
+
     // private Image image;
+    private int itemID;
+
+    public Item(String name, String details) {
+        this.name = name;
+        this.details = details;
+    }
+
+    public Item(String name, String details, int id) {
+        this.name = name;
+        this.details = details;
+        this.itemID = id;
+    }
 
     public String getName() {
         return name;
@@ -30,9 +43,11 @@ public class Item {
         this.details = details;
     }
 
-    public Item(String name, String details) {
-        this.name = name;
-        this.details = details;
+    public int getItemID() {
+        return itemID;
     }
 
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
 }

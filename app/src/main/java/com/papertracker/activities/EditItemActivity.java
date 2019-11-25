@@ -3,8 +3,10 @@ package com.papertracker.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -20,8 +22,9 @@ import com.papertracker.adapters.ItemEditorAdapter;
 import com.papertracker.helpers.PaperTrackerDBHelper;
 import com.papertracker.models.Document;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class EditItemActivity extends AppCompatActivity {
     ArrayList<Document> docList;
@@ -64,14 +67,22 @@ public class EditItemActivity extends AppCompatActivity {
                     Toast.makeText(EditItemActivity.this, "Name and details are mandatory!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                dbHelper.addItem(name.getText().toString(), details.getText().toString());
+                long itemID = dbHelper.addItem(name.getText().toString(), details.getText().toString());
+                EditItemActivity.this.updateDocuments();
+                ArrayList<Document> tmpDocs = new ArrayList<>();
+                for (Document doc : adapter.getDocuments()) {
+                    if (doc.getName() != null && !"".equals(doc.getName()) && doc.getExpirationDate() != null) {
+                        tmpDocs.add(doc);
+                    }
+                }
+                dbHelper.addDocuments(itemID, tmpDocs);
                 Toast.makeText(EditItemActivity.this, "Item saved", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
 
         docList = new ArrayList<>();
-        docList.add(new Document("test", new Date()));
+        docList.add(new Document("", null));
         adapter = new ItemEditorAdapter(docList);
         rvDocs = findViewById(R.id.rvNewDocs);
         rvDocs.setAdapter(adapter);
@@ -85,10 +96,29 @@ public class EditItemActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Document doc = new Document("", new Date());
+                EditItemActivity.this.updateDocuments();
+                Document doc = new Document("", null);
                 adapter.getDocuments().add(doc);
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void updateDocuments() {
+        RecyclerView.ViewHolder holder = rvDocs.findViewHolderForAdapterPosition(adapter.getItemCount() - 1);
+        TextInputEditText name = holder.itemView.findViewById(R.id.newDocName);
+        EditText expirationDate = holder.itemView.findViewById(R.id.expirationDate);
+        Document doc = adapter.getDocuments().get(adapter.getItemCount() - 1);
+        if (name.getText() == null || "".equals(name.getText().toString()) ||
+                expirationDate.getText() == null || "".equals(expirationDate.getText().toString())) {
+            Toast.makeText(EditItemActivity.this, "Name and expiration date are mandatory!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        doc.setName(name.getText().toString());
+        try {
+            doc.setExpirationDate(new SimpleDateFormat("dd/MM/yyyy").parse(expirationDate.getText().toString()));
+        } catch (ParseException e) {
+            Log.e("ERROR", "Wrong date format: " + expirationDate.getText().toString());
+        }
     }
 }

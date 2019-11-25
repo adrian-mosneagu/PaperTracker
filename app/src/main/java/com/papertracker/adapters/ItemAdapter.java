@@ -18,15 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.papertracker.R;
 import com.papertracker.activities.EditItemActivity;
+import com.papertracker.helpers.PaperTrackerDBHelper;
 import com.papertracker.models.Document;
 import com.papertracker.models.Item;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
+    private ArrayList<Item> items;
     private boolean expanded = false;
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
@@ -90,12 +91,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             itemView.findViewById(R.id.expandedLayout).setVisibility(View.VISIBLE);
 
 
-            List<Document> docList = new ArrayList<>();
+            Item item = items.get(getAdapterPosition());
 
-            // TODO: This info should be retrieved from DB
-            docList.add(new Document("Vigneta", new Date()));
-            docList.add(new Document("RCA", new Date()));
-            docList.add(new Document("RCA", new Date()));
+            PaperTrackerDBHelper dbHelper = new PaperTrackerDBHelper(itemView.getContext());
+            ArrayList<Document> docList = dbHelper.getDocuments(item.getItemID());
 
             RecyclerView rvDocuments = itemView.findViewById(R.id.rvDocuments);
             rvDocuments.setAdapter(new DocumentAdapter(docList));
@@ -113,9 +112,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
     }
 
-    private List<Item> items;
-
-    public ItemAdapter(List<Item> items) {
+    public ItemAdapter(ArrayList<Item> items) {
         this.items = new ArrayList<>(items);
     }
 
