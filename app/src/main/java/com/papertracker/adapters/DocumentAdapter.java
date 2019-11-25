@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,7 @@ import com.papertracker.models.Document;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -27,6 +28,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
         private TextView name;
         private TextView expirationDate;
         private ImageButton deleteButton;
+        private ImageView imageViewWarning;
 
         protected ViewHolder(final View itemView) {
             super(itemView);
@@ -34,6 +36,8 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
             name = itemView.findViewById(R.id.tvDocName);
             expirationDate = itemView.findViewById(R.id.tvDocExpirationDate);
             deleteButton = itemView.findViewById(R.id.btDocDelete);
+            imageViewWarning = itemView.findViewById(R.id.ivWarning);
+
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -56,9 +60,13 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
         }
     }
 
-    private List<Document> documents;
+    private ArrayList<Document> documents;
 
-    protected DocumentAdapter(List<Document> documents) {
+    protected DocumentAdapter(ArrayList<Document> documents) {
+        Date current = new Date();
+        for (Document doc : documents) {
+            doc.setDaysLeft((doc.getExpirationDate().getTime() - current.getTime())/ (1000 * 60 * 60 * 24));
+        }
         this.documents = new ArrayList<>(documents);
     }
 
@@ -76,6 +84,12 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
         // Get the data model based on position
         Document doc = documents.get(position);
 
+        if (doc.getDaysLeft() < 1) {
+            viewHolder.imageViewWarning.setVisibility(View.VISIBLE);
+            viewHolder.imageViewWarning.setImageResource(R.drawable.ic_warning_red_24dp);
+        } else if (doc.getDaysLeft() < 7) {
+            viewHolder.imageViewWarning.setVisibility(View.VISIBLE);
+        }
         // Set item views based on your views and data model
         TextView tvName = viewHolder.name;
         tvName.setText(doc.getName());

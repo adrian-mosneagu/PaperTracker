@@ -6,6 +6,7 @@ public class Document {
     private String name;
     private Date expirationDate;
     private int itemID;
+    private long daysLeft;
 
     public Document(String name, Date expirationDate) {
         this.name = name;
@@ -34,5 +35,13 @@ public class Document {
 
     public int getItemID() {
         return itemID;
+    }
+
+    public long getDaysLeft(){
+        return daysLeft;
+    }
+
+    public void setDaysLeft(long daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }
