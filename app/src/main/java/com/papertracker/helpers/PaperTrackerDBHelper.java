@@ -67,7 +67,7 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
             String details = cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN));
-            int id = cursor.getInt(cursor.getColumnIndex(ID_COLUMN));
+            long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
             items.add(new Item(name, details, id));
         }
 
@@ -75,13 +75,13 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         return items;
     }
 
-    public Item getItem(int itemID) {
+    public Item getItem(long itemID) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(ITEMS_TABLE_NAME, null, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)}, null, null, null);
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
             String details = cursor.getString(cursor.getColumnIndex(DESCRIPTION_COLUMN));
-            int id = cursor.getInt(cursor.getColumnIndex(ID_COLUMN));
+            long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
             cursor.close();
             return new Item(name, details, id);
         }
@@ -90,7 +90,7 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public ArrayList<Document> getDocuments(int itemID) {
+    public ArrayList<Document> getDocuments(long itemID) {
         ArrayList<Document> documents = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(DOCUMENTS_TABLE_NAME, null, ITEM_ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)}, null, null, null);
@@ -122,12 +122,12 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         return itemID;
     }
 
-    public void deleteItem(int itemID) {
+    public void deleteItem(long itemID) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(ITEMS_TABLE_NAME, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)});
     }
 
-    public void addDocument(int itemID, String name, Date expirationDate) {
+    public void addDocument(long itemID, String name, Date expirationDate) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ITEM_ID_COLUMN, itemID);
@@ -150,9 +150,18 @@ public class PaperTrackerDBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteDocuments(int itemID) {
+    public void deleteDocuments(long itemID) {
         SQLiteDatabase db = getWritableDatabase();
-        db.delete(DOCUMENTS_TABLE_NAME, ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)});
+        db.delete(DOCUMENTS_TABLE_NAME, ITEM_ID_COLUMN + " = ?", new String[] {String.valueOf(itemID)});
+    }
+
+    public void updateItem(Item item) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NAME_COLUMN, item.getName());
+        values.put(DESCRIPTION_COLUMN, item.getDetails());
+        db.update(ITEMS_TABLE_NAME, values, ID_COLUMN + "=" + item.getItemID(), null);
+        db.close();
     }
 
 }

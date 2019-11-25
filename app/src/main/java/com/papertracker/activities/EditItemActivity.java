@@ -68,7 +68,13 @@ public class EditItemActivity extends AppCompatActivity {
                     Toast.makeText(EditItemActivity.this, "Name and details are mandatory!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                long itemID = dbHelper.addItem(name.getText().toString(), details.getText().toString());
+                long itemID = getIntent().getLongExtra("ItemID", -1);
+                if (itemID == -1) {
+                    itemID = dbHelper.addItem(name.getText().toString(), details.getText().toString());
+                } else {
+                    dbHelper.updateItem(new Item(name.getText().toString(), details.getText().toString(), itemID));
+                    dbHelper.deleteDocuments(itemID);
+                }
                 EditItemActivity.this.updateDocuments();
                 ArrayList<Document> tmpDocs = new ArrayList<>();
                 for (Document doc : adapter.getDocuments()) {
@@ -82,7 +88,7 @@ public class EditItemActivity extends AppCompatActivity {
             }
         });
 
-        int itemID = getIntent().getIntExtra("ItemID", -1);
+        long itemID = getIntent().getLongExtra("ItemID", -1);
 
         docList = new ArrayList<>();
         if (itemID == -1) {

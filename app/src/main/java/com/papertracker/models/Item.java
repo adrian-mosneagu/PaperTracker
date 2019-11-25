@@ -10,14 +10,14 @@ public class Item {
 
 
     // private Image image;
-    private int itemID;
+    private long itemID;
 
     public Item(String name, String details) {
         this.name = name;
         this.details = details;
     }
 
-    public Item(String name, String details, int id) {
+    public Item(String name, String details, long id) {
         this.name = name;
         this.details = details;
         this.itemID = id;
@@ -43,7 +43,7 @@ public class Item {
         this.details = details;
     }
 
-    public int getItemID() {
+    public long getItemID() {
         return itemID;
     }
 
